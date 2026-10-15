@@ -1,3 +1,14 @@
+export interface LanguageItem {
+  name: string;
+  levelPercent: number;
+}
+
+export interface ReferenceItem {
+  name: string;
+  role: string;
+  phone: string;
+}
+
 export interface CvData {
   name: string;
   title: string;
@@ -6,17 +17,15 @@ export interface CvData {
     email: string;
     address: string;
     birthDate: string;
+    nationality?: string;
     phone: string;
   };
-  langues: string[];
-  atouts: string[];
+  langues: (string | LanguageItem)[];
+  atouts?: string[];
+  references?: ReferenceItem[];
   centresInteret: {
     name: string;
     detail?: string;
-  }[];
-  reseauxSociaux: {
-    platform: "github" | "youtube" | string;
-    handle: string;
   }[];
   diplomes: {
     title: string;
@@ -50,13 +59,25 @@ export const cvData: CvData = {
     email: "alexandre.dupont.demo@example.com",
     address: "Lyon, France",
     birthDate: "15/05/2002",
+    nationality: "Française",
     phone: "+33 6 00 00 00 00",
   },
-  langues: ["Français", "Anglais"],
-  atouts: [
-    "Conception logicielle & Architectures modulaires web et cloud.",
-    "Bases de données relationnelles et NoSQL, modélisation avancée.",
-    "Autonomie technique, curiosité et veille permanente.",
+  langues: [
+    { name: "Français", levelPercent: 90 },
+    { name: "Anglais", levelPercent: 60 },
+  ],
+  atouts: ["Autonomie", "Curieux", "Esprit d'équipe"],
+  references: [
+    {
+      name: "DUPONT Jean",
+      role: "Développeur Full-stack",
+      phone: "+33 XX XX XX",
+    },
+    {
+      name: "LAMAIRE Zoé",
+      role: "Lead Developer chez SFR",
+      phone: "+33 XX XX XX",
+    },
   ],
   centresInteret: [
     {
@@ -66,10 +87,6 @@ export const cvData: CvData = {
     { name: "Jeux vidéo" },
     { name: "Course à pied" },
     { name: "Musique" },
-  ],
-  reseauxSociaux: [
-    { platform: "github", handle: "@alexdupont" },
-    { platform: "youtube", handle: "@TechDemo" },
   ],
   diplomes: [
     {
@@ -97,19 +114,27 @@ export const cvData: CvData = {
   realisations: [
     {
       title: "Plateforme de gestion éco-responsable des ressources",
-      period: "2024",
+      period: "(Projet de soutenance à venir)",
       description:
         "Création d'une application de suivi d'énergie pour bâtiments connectés avec alertes temps réel.",
     },
   ],
   competences: [
     {
-      title: "Développement informatique",
-      details: "TypeScript, Python, Go, Next.js",
+      title: "Conception & Architecture",
+      details: "Conception logicielle & architectures modulaires web et cloud",
+    },
+    {
+      title: "Bases de données & SGBD",
+      details: "Bases de données relationnelles et NoSQL, modélisation avancée",
+    },
+    {
+      title: "Développement logiciel",
+      details: "TypeScript, Python, Go, Next.js, React",
     },
     {
       title: "Outils & DevOps",
-      details: "Git, Docker, Linux, CI/CD",
+      details: "Git, Docker, Linux, CI/CD, automatisation",
     },
     {
       title: "Bureautique & Conception",
