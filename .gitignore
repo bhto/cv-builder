@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local private CV data (never commit real info)
+app/cv/cv-data.local.ts
+*.local.ts
